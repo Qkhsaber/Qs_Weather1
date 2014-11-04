@@ -76,7 +76,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="-10dip"
-                        
                         android:src="@drawable/wi0" />
                 </LinearLayout>
 
@@ -98,35 +97,35 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal" >
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_weight="7"
                     android:orientation="vertical" >
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-                    <TextView
-                     android:id="@+id/old"
-                     android:layout_width="match_parent"
-                     android:layout_height="107dp"
-                     android:layout_marginTop="20dp"
-                     android:layout_weight="4"
-                     android:background="#20ffffff"
-                     android:textSize="20dp"
-                     android:gravity="center" />
 
-               <ImageView
-                     android:id="@+id/img_taday_weather1"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:src="@drawable/wi0"
-                     android:layout_marginTop="50dip"
-                     android:layout_marginLeft="-5dip"
-                     
-                     />
-               
-               </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/old"
+                            android:layout_width="match_parent"
+                            android:layout_height="107dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="4"
+                            android:background="#20ffffff"
+                            android:gravity="center"
+                            android:textSize="20dp" />
+
+                        <ImageView
+                            android:id="@+id/img_taday_weather1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="-5dip"
+                            android:layout_marginTop="50dip"
+                            android:src="@drawable/wi0" />
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -136,7 +135,7 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        
+                        android:id="@+id/feel_like"
                         android:layout_width="match_parent"
                         android:layout_height="25dip"
                         android:layout_marginTop="20dip"
@@ -231,8 +230,8 @@
                         android:shadowDx="1"
                         android:shadowDy="1"
                         android:shadowRadius="1"
-                        android:textColor="#ffffff"
                         android:text="风向和风速"
+                        android:textColor="#ffffff"
                         android:textSize="15dip" />
 
                     <View
@@ -241,14 +240,11 @@
                         android:background="@drawable/dotted_line" />
 
                     <ImageView
-                        
                         android:layout_width="match_parent"
                         android:layout_height="100dip"
                         android:layout_weight="2"
                         android:background="#20ffffff"
-                        android:gravity="center"
-                        
-                         />
+                        android:gravity="center" />
                 </LinearLayout>
 
                 <TextView
@@ -258,12 +254,12 @@
                     android:layout_marginTop="20dip"
                     android:layout_weight="2"
                     android:background="#20ffffff"
-                    android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="1"
-                        android:textColor="#ffffff"
                     android:gravity="center_vertical|left"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
                     android:text="风速"
+                    android:textColor="#ffffff"
                     android:textSize="15dip" />
             </LinearLayout>
 
@@ -281,8 +277,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="2"
-                    android:orientation="horizontal"
-                    android:background="#20ffffff" >
+                    android:background="#20ffffff"
+                    android:orientation="horizontal" >
 
                     <ImageButton
                         android:id="@+id/img_sun_up"
@@ -320,11 +316,11 @@
                     android:background="#20ffffff"
                     android:gravity="left|bottom"
                     android:paddingLeft="5dip"
-                    android:text="1"
                     android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="1"
-                        android:textColor="#ffffff"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="1"
+                    android:textColor="#ffffff"
                     android:textSize="16dip" />
 
                 <TextView
@@ -335,11 +331,11 @@
                     android:background="#20ffffff"
                     android:gravity="right|bottom"
                     android:paddingLeft="5dip"
-                    android:text="1"
                     android:shadowDx="1"
-                        android:shadowDy="1"
-                        android:shadowRadius="1"
-                        android:textColor="#ffffff"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="1"
+                    android:textColor="#ffffff"
                     android:textSize="16dip" />
             </LinearLayout>
 
@@ -349,7 +345,11 @@
                 android:layout_height="20dip"
                 android:background="#20ffffff"
                 android:gravity="center_horizontal|bottom"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
                 android:text="y"
+                android:textColor="#ffffff"
                 android:textSize="16dip" />
         </LinearLayout>
     </ScrollView>

@@ -55,6 +55,16 @@ public class Stringsplit
 		}
 		return title;
 	}
+    public String true_temp(String result) {
+		String title = "";
+		Document doc = Jsoup.parse(result);
+		Elements links = doc.select("tmp");
+		for (Element link : links) {
+			title += link.text();
+			title = stringsplit(title, 0);
+		}
+		return title;
+	}
    
     public String date(String result) {
 		String title = "";

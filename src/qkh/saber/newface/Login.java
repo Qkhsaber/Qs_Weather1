@@ -40,6 +40,7 @@ public class Login extends Activity {
 	String str_4_temperature = "null";
 
 	String str_real_time_temperature = "null";// 实时温度
+	String str_feel_like="null";//体感温度
 
 	String str_taday_weather = "null";// 当天的天气状况
 
@@ -62,12 +63,10 @@ public class Login extends Activity {
 	String str_sun_up = "null";// 当天的日出时间
 	String str_sun_set = "null";// 当天的日落时间
 	String str_uptada_time = "null";// 更新天氣時間
-
+	String str_uptada_time1 = "null";// 更新天氣時間
 	static final int SLEEP_TIME = 3 * 1000;
 
 	private static final String PREFS_NAME = "weather_info";
-	private static final int BEFORE_LENGTH=12;
-	private static final int BEHIND_LENGTH=7;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -114,8 +113,9 @@ public class Login extends Activity {
 						str_4_temperature = str_4_max_temperature + "~"
 								+ str_4_min_temperature + "°C";
 
-						str_real_time_temperature = new Stringsplit()
+						str_feel_like = new Stringsplit()
 								.date(result);// 当天的体感温度
+						str_real_time_temperature = new Stringsplit().true_temp(result);
 
 						str_visibility = new Stringsplit().see(result)[0];// 能见度
 						str_mor_rianprobability = new Stringsplit()
@@ -208,7 +208,8 @@ public class Login extends Activity {
 		bd.putString("aft_humidness", str_aft_humidness);
 		bd.putString("mor_rianprobability", str_mor_rianprobability);
 		bd.putString("aft_rianprobability", str_aft_rianprobability);
-		bd.putString("uptada_time", str_uptada_time);
+		bd.putString("updata_time", str_uptada_time);
+		bd.putString("feel_like", str_feel_like);
 		intent.putExtra("weather", bd);
 		Login.this.startActivity(intent);
 		Login.this.finish();

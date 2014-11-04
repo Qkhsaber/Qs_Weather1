@@ -47,7 +47,7 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 	String str_4_temperature = "null";
 
 	String str_real_time_temperature = "null";//实时温度
-
+    String str_feel_like="null";
 	String str_taday_weather = "null";//当天的天气状况
 
 	String str_1_weather = "null";//后四天的天气状况
@@ -69,7 +69,7 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 	String str_sun_up = "null";//当天的日出时间
 	String str_sun_set = "null";//当天的日落时间
 	String str_updata_time="null";//更新时间
-
+   
 
 	static final int SLEEP_TIME = 3 * 1000;
 
@@ -87,7 +87,7 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 	ImageView img_sun_up;
 	ImageView img_sun_set;
 	TextView updata_time;
-
+    TextView feel_like;
 	
 
 	@Override
@@ -141,6 +141,7 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 		img_sun_up=(ImageView)findViewById(R.id.img_sun_up);
 		img_sun_set=(ImageView)findViewById(R.id.img_sun_set);
 		updata_time=(TextView)findViewById(R.id.updata_time);
+		feel_like=(TextView)findViewById(R.id.feel_like);
 
 		Typeface fontFace_Thin = Typeface.createFromAsset(getAssets(),//字体的设置
 				"fonts/Roboto-Thin.ttf");
@@ -206,9 +207,10 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 		str_sun_up=bd.getString("sun_up");
 		str_sun_set=bd.getString("sun_set");
 		str_updata_time=bd.getString("updata_time");
+		str_feel_like=bd.getString("feel_like");
 		
 		if (str_real_time_temperature != "null") {
-			real_time_temperature.setText(str_real_time_temperature+"°");
+			real_time_temperature.setText(str_feel_like+"°");
 			taday_weather.setText(str_taday_weather);
 			visibility.setText("能见度    "+str_visibility+"公里");
 			morning.setText("上午  下雨概率"+str_mor_rianprobability+"% "+"空气湿度"+str_mor_humidness+"%");
@@ -217,6 +219,7 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 			updata_time.setText("更新时间"+str_updata_time);
 			sun_up.setText(str_sun_up);
 			sun_set.setText(str_sun_set);
+			feel_like.setText("体感温度    "+str_real_time_temperature+"°");
 			img_sun_up.setBackgroundResource(R.drawable.wis);
 			img_sun_set.setBackgroundResource(R.drawable.wim);
 			//开头图片
