@@ -56,7 +56,6 @@ public class Download_Weather_Date extends Service {
 	String str_sun_up = "null";
 	String str_sun_set = "null";
 
-	int CLOSE_NUM = 0;
 
 	static final int SLEEP_TIME = 3 * 1000;
 

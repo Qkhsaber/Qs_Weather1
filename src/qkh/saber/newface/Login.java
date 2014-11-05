@@ -158,13 +158,13 @@ public class Login extends Activity {
 									.tianqi(result)[0];
 						}
 
-						goHome();
+						setdata();
 
 						Log.v("---------1111111111-----------------------",
 								str_uptada_time);
 					} else {
 
-						goHome();
+						setdata();
 					}
 				} else {
 					try {
@@ -182,7 +182,7 @@ public class Login extends Activity {
 		//
 	}
 
-	private void goHome() {
+	private void setdata() {
 
 		Intent intent = new Intent(Login.this, SlidingMenuNestTabActivity.class);
 		Bundle bd = new Bundle();
