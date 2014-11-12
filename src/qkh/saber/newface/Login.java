@@ -9,11 +9,8 @@ import saber.qkh.newweather.R;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -135,12 +132,11 @@ public class Login extends Activity {
 						str_2_weather = new Stringsplit().tianqi(result)[12];
 						str_3_weather = new Stringsplit().tianqi(result)[16];
 						str_4_weather = new Stringsplit().tianqi(result)[20];
-						str_uptada_time = new Stringsplit()
+						str_uptada_time1 = new Stringsplit()
 								.up_data_time(result)[0];
-						
-						for (int i = 0; i < str_uptada_time.length(); i++) {//裁切更新时间字符
-							if(str_uptada_time.charAt(i)=='M'){
-								str_uptada_time=str_uptada_time.substring(9,
+						for (int i = 0; i < str_uptada_time1.length(); i++) {//裁切更新时间字符
+							if(str_uptada_time1.charAt(i)=='M'){
+								str_uptada_time=str_uptada_time1.substring(i-7,
 										i+1);
 							}
 
@@ -181,7 +177,7 @@ public class Login extends Activity {
 		//
 		//
 	}
-
+//封装数据
 	private void setdata() {
 
 		Intent intent = new Intent(Login.this, SlidingMenuNestTabActivity.class);

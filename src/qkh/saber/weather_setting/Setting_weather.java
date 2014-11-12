@@ -1,12 +1,16 @@
 package qkh.saber.weather_setting;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import qkh.saber.connect.Http_GET;
 import qkh.saber.data_process.StringList;
 import qkh.saber.data_process.Stringsplit;
 import qkh.saber.data_process.Stringwea;
 import qkh.saber.data_process.Weather_code_city;
 import qkh.saber.http_client.Http_Client;
-import qkh.saber.newface.Login;
 import qkh.saber.newface.SlidingMenuNestTabActivity;
 import saber.qkh.newweather.R;
 import android.app.Activity;
@@ -21,11 +25,19 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class Setting_weather extends Activity {
+	@Override
+	protected void onPause() {
+		
+		super.onPause();
+		finish();
+	}
 	String str_city_code = "null";// 城市代码
 	String str_city_name = "null";// 城市名称
 
@@ -77,6 +89,11 @@ public class Setting_weather extends Activity {
 	Button search_city;
 	String city;// 代码
 	String city_code;
+	ListView setting_list;
+	
+	private String[] data={str_city_name
+		
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +102,11 @@ public class Setting_weather extends Activity {
 
 		search_city = (Button) findViewById(R.id.search_button_city);
 		weather_city = (EditText) findViewById(R.id.search_edittext_city);
+		setting_list=(ListView)findViewById(R.id.setting_list);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+				Setting_weather.this, android.R.layout.simple_list_item_1, data);
+		setting_list.setAdapter(adapter);
 
 		search_city.setOnClickListener(new OnClickListener() {
 
@@ -100,6 +122,7 @@ public class Setting_weather extends Activity {
 							Toast.LENGTH_SHORT).show();
 					SaveUserDate();
 				}
+				
 				new Thread() {// 开始联网获取数据
 					@Override
 					public void run() {
@@ -198,7 +221,7 @@ public class Setting_weather extends Activity {
 								
 							} else {
 
-								setdata();
+							setdata();
 							}
 						} else {
 							try {
@@ -213,6 +236,7 @@ public class Setting_weather extends Activity {
 
 				}.start();
 				//
+				
 
 			}
 		});
@@ -250,7 +274,6 @@ public class Setting_weather extends Activity {
 		bd.putString("feel_like", str_feel_like);
 		intent.putExtra("weather", bd);
 		Setting_weather.this.startActivity(intent);
-		Setting_weather.this.finish();
 	}
 
 	private void SaveUserDate() {
@@ -259,10 +282,12 @@ public class Setting_weather extends Activity {
 		// 写入配置文件
 		Editor spEd = sp.edit();
 		spEd.putBoolean("isSave", true);
-		spEd.putString("weather_city", city_code);
+		spEd.putString("weather_city", city);
+		spEd.putString("city_name", str_city_name);
 
 		spEd.commit();
 	}
+	
 
 	// 判断是否联网
 	boolean InterneTable() {

@@ -224,7 +224,7 @@ public class Stringsplit
 		return title;
 	}
    public String[] up_data_time(String result) {
-		String title[] = new String[200];
+		String title[] = new String[3];
 		Document doc = Jsoup.parse(result);
 		Elements links = doc.select("lsup");
 		int i= 0;

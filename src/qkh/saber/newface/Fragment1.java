@@ -5,12 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import qkh.saber.connect.Http_GET;
+import qkh.saber.data_process.StringList;
+import qkh.saber.data_process.Stringsplit;
+import qkh.saber.http_client.Http_Client;
 import qkh.saber.weather_setting.Setting_weather;
 import saber.qkh.newweather.R;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +76,7 @@ public class Fragment1 extends Fragment {
 	String str_sun_up = "null";// 当天的日出时间
 	String str_sun_set = "null";// 当天的日落时间
 	String str_uptada_time = "null";// 更新天氣時間
-
+	public String code = "null";
 	static final int SLEEP_TIME = 3 * 1000;
 
 	private static final String PREFS_NAME = "weather_info";
@@ -90,6 +96,13 @@ public class Fragment1 extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		mActivity = this.getActivity();
+		SharedPreferences sp = getActivity()
+				.getSharedPreferences(PREFS_NAME, 0);
+		str_city_code = sp.getString("weather_city", "CHXX0116");
+		str_city_name = new StringList().zhuanhuan(str_city_code);
+		if (str_city_name.equals("null")) {
+			str_city_name =sp.getString("weather_city", "CHXX0116");
+		}// 城市名称处理
 
 		View view = inflater.inflate(R.layout.pull_list, null);// 增加侧滑�?
 		mAbTaskQueue = AbTaskQueue.getInstance();
@@ -104,8 +117,9 @@ public class Fragment1 extends Fragment {
 		// 使用自定义的Adapter
 		// 注释掉会导致崩溃
 		myListViewAdapter = new New_adapter(mActivity, list,
-				R.layout.list_items, new String[] { "itemsIcon","itemsButton" },
-				new int[] {R.id.itemsIcon, R.id.itemsButton });
+				R.layout.list_items,
+				new String[] { "itemsIcon", "itemsButton" }, new int[] {
+						R.id.itemsIcon, R.id.itemsButton });
 		mAbPullListView.setAdapter(myListViewAdapter);
 		// item被点击事�?
 		mAbPullListView.setOnItemClickListener(new OnItemClickListener() {
@@ -113,11 +127,11 @@ public class Fragment1 extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// 增加天气选择
-				if(id==0){
-				Intent intent = new Intent(mActivity,Setting_weather.class);
-				startActivity(intent);
-				}else{
-					
+				if (id == 0) {
+					Intent intent = new Intent(mActivity, Setting_weather.class);
+					startActivity(intent);
+				} else {
+
 				}
 
 			}
@@ -126,12 +140,10 @@ public class Fragment1 extends Fragment {
 		return view;
 	}
 
-	
-	
 	@Override
 	public void onStart() {
 		super.onStart();
-		
+
 		// 定义两种查询的事�?
 		final AbTaskItem item1 = new AbTaskItem();
 		item1.listener = new AbTaskListener() {
@@ -156,12 +168,11 @@ public class Fragment1 extends Fragment {
 					newList = new ArrayList<Map<String, Object>>();
 					Map<String, Object> map = null;
 
-					
-						map = new HashMap<String, Object>();
-						map.put("itemsIcon", R.drawable.ic_launcher);
-						map.put("itemsButton", "增加天气" );
-						newList.add(map);
-					
+					map = new HashMap<String, Object>();
+					map.put("itemsIcon", R.drawable.ic_launcher);
+					map.put("itemsButton", "增加城市");
+					newList.add(map);
+
 				} catch (Exception e) {
 				}
 			};
@@ -178,25 +189,30 @@ public class Fragment1 extends Fragment {
 					newList.clear();
 				}
 				mAbPullListView.stopLoadMore();
-				//list.clear();// 清空列表
+				// list.clear();// 清空列表
 			}
 
 			//
 			@Override
 			public void get() {
 				try {
-					currentPage++;
-					Thread.sleep(1000);
+					
 					newList = new ArrayList<Map<String, Object>>();
 					Map<String, Object> map = null;
+					if(currentPage==1){
 
-					for (int i = 0; i < pageSize; i++) {
-						map = new HashMap<String, Object>();
-						map.put("itemsIcon", R.drawable.ic_launcher);
-						map.put("itemsButton", "苏州" + (i + 1));
-						if ((list.size() + newList.size()) < total) {
-							newList.add(map);
-						}
+					// for (int i = 0; i < pageSize; i++) {
+						currentPage++;
+						Thread.sleep(1000);
+
+					map = new HashMap<String, Object>();
+					map.put("itemsIcon", R.drawable.ic_launcher);
+
+					map.put("itemsButton", str_city_name);
+					if ((list.size() + newList.size()) < total) {
+						newList.add(map);
+					}
+					// }
 					}
 				} catch (Exception e) {
 					currentPage--;

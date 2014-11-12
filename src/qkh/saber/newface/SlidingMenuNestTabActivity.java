@@ -1,20 +1,13 @@
 package qkh.saber.newface;
 
-import qkh.saber.connect.Http_GET;
-import qkh.saber.data_process.StringList;
-import qkh.saber.data_process.Stringsplit;
-import qkh.saber.data_process.Stringwea;
-import qkh.saber.http_client.Http_Client;
 import saber.qkh.newweather.R;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -93,10 +86,11 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 		setAbContentView(R.layout.sliding_menu_content);
 
 		AbTitleBar mAbTitleBar = this.getTitleBar();
-		mAbTitleBar.setTitleText("Weather");
-		mAbTitleBar.setLogo(R.drawable.button_selector_back);
-		mAbTitleBar.setTitleBarBackground(R.drawable.abb);// actionbar样式
+		mAbTitleBar.setTitleText("Qs天气");
 		mAbTitleBar.setTitleTextMargin(10, 0, 0, 0);
+		mAbTitleBar.setLogo(R.drawable.button_selector_back);
+		mAbTitleBar.setTitleBarBackground(R.drawable.abb);// actionbar样式更换图片！
+		//mAbTitleBar.setTitleSmallText("副标题");
 		mAbTitleBar.setLogoLine(R.drawable.line);
 		mAbTitleBar.getLogoView().setBackgroundResource(
 				R.drawable.button_selector_menu);
@@ -172,6 +166,7 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 
 			}
 		});
+		
 			new Thread() {// 开始联网获取数据
 				@Override
 				public void run() {
@@ -207,6 +202,7 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 						str_feel_like = bd.getString("feel_like");
 
 						if (str_real_time_temperature != "null") {
+							
 							real_time_temperature.setText(str_feel_like + "°");
 							taday_weather.setText(str_taday_weather);
 							visibility.setText("能见度    " + str_visibility
@@ -292,121 +288,20 @@ public class SlidingMenuNestTabActivity extends AbActivity {
 						}
 					}
 				}
-			}.start();
-		}
-
+			}.start();}
+		
+		
 //	@Override
 //	protected void onStart() {
 //		// TODO 自动生成的方法存根
+//		
+//		
+//		mAbTitleBar.setTitleText(str_city_name);
+//		Log.v("--------触发---------", str_city_name);
 //		super.onStart();
-//		new Thread() {// 开始联网获取数据
-//			@Override
-//			public void run() {
-//				num = num + 1;
-//				if (InterneTable()) {
-//					Intent intent = getIntent();
-//					if (num < 1) {
-//						Bundle bd = intent.getBundleExtra("setting_weather");// 接收数据
-//						Log.v("---------------", "can you ?");
-//						str_city_name = bd.getString("city_name");
-//						str_1_temperature = bd.getString("temperature1");
-//						str_2_temperature = bd.getString("temperature2");
-//						str_3_temperature = bd.getString("temperature3");
-//						str_4_temperature = bd.getString("temperature4");
-//						str_real_time_temperature = bd
-//								.getString("real_time_temperature");
-//						str_taday_weather = bd.getString("taday_weather");
-//						str_1_weather = bd.getString("weather1");
-//						str_2_weather = bd.getString("weather2");
-//						str_3_weather = bd.getString("weather3");
-//						str_4_weather = bd.getString("weather4");
-//						str_visibility = bd.getString("visibility");
-//						str_mor_rianprobability = bd
-//								.getString("mor_rianprobability");
-//						str_aft_rianprobability = bd
-//								.getString("aft_rianprobability");
-//						str_mor_humidness = bd.getString("mor_humidness");
-//						str_aft_humidness = bd.getString("aft_humidness");
-//						str_wind_direction = bd.getString("wind_direction");
-//						str_wind_speed = bd.getString("wind_speed");
-//						str_sun_up = bd.getString("sun_up");
-//						str_sun_set = bd.getString("sun_set");
-//						str_updata_time = bd.getString("updata_time");
-//						str_feel_like = bd.getString("feel_like");
-//
-//						real_time_temperature.setText(str_feel_like + "°");
-//						taday_weather.setText(str_taday_weather);
-//						visibility.setText("能见度    " + str_visibility + "公里");
-//						morning.setText("上午  下雨概率" + str_mor_rianprobability
-//								+ "% " + "空气湿度" + str_mor_humidness + "%");
-//						afternoon.setText("下午  下雨概率" + str_aft_rianprobability
-//								+ "% " + "空气湿度" + str_aft_humidness + "%");
-//						direction_speed.setText(str_wind_direction + "    "
-//								+ str_wind_speed + "km/s");
-//						updata_time.setText("更新时间" + str_updata_time);
-//						sun_up.setText(str_sun_up);
-//						sun_set.setText(str_sun_set);
-//						feel_like.setText("体感温度    "
-//								+ str_real_time_temperature + "°");
-//						img_sun_up.setBackgroundResource(R.drawable.wis);
-//						img_sun_set.setBackgroundResource(R.drawable.wim);
-//						// 开头图片
-//						if (str_taday_weather.equals("Sunny")
-//								| str_taday_weather.equals("Clear")
-//								| str_taday_weather.equals("Fair")) {
-//							img_taday_weather.setImageResource(R.drawable.wi13);
-//							img_taday_weather1
-//									.setImageResource(R.drawable.wi13);
-//						} else if (str_taday_weather.equals("Partly Cloudy")
-//								| str_taday_weather.equals("Mostly Cloudy")) {
-//							img_taday_weather.setImageResource(R.drawable.wi14);
-//							img_taday_weather1
-//									.setImageResource(R.drawable.wi14);
-//						} else if (str_taday_weather.equals("Rain")
-//								| str_taday_weather.equals("AM Showers")
-//								| str_taday_weather.equals("PM Showers")
-//								| str_taday_weather.equals("Scattered Showers")) {
-//							img_taday_weather.setImageResource(R.drawable.wi15);
-//							img_taday_weather1
-//									.setImageResource(R.drawable.wi15);
-//						} else if (str_taday_weather.equals("Cloudy")) {
-//							img_taday_weather.setImageResource(R.drawable.wi15);
-//							img_taday_weather1
-//									.setImageResource(R.drawable.wi15);
-//						} else if (str_taday_weather.equals("Showers")
-//								| str_taday_weather.equals("Light Rain")) {
-//							img_taday_weather.setImageResource(R.drawable.wi15);
-//							img_taday_weather1
-//									.setImageResource(R.drawable.wi15);
-//						} else if (str_taday_weather.equals("Fog")
-//								| str_taday_weather.equals("Haze")
-//								| str_taday_weather.equals("Mist")) {
-//							img_taday_weather.setImageResource(R.drawable.wi15);
-//							img_taday_weather1
-//									.setImageResource(R.drawable.wi15);
-//						} else if (str_taday_weather.equals("Mostly Sunny")) {
-//							img_taday_weather.setImageResource(R.drawable.wi15);
-//							img_taday_weather1
-//									.setImageResource(R.drawable.wi15);
-//						} else {
-//							img_taday_weather.setImageResource(R.drawable.wi12);
-//							img_taday_weather1
-//									.setImageResource(R.drawable.wi12);
-//						}
-//
-//					} else {
-//					}
-//
-//				} else {
-//					try {
-//						sleep(SLEEP_TIME);// 如果联网失败会睡眠30s继续联网
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-//		}.start();
+//		
 //	}
+
 
 	// 判断是否联网
 	boolean InterneTable() {
